@@ -5,7 +5,8 @@ import {
   View,
   Image,
   Pressable,
-  TextInput
+  TextInput,
+  ToastAndroid,
 } from "react-native";
 import React, { useState, useRef } from "react";
 import MapView from "react-native-maps";
@@ -113,7 +114,16 @@ const ParkPage = () => {
   const IsActive = () => {
     active == false ? SetActive(true) : SetActive(false);
   };
-
+  function showToast() {
+    ToastAndroid.showWithGravity(
+      "Appointment made",
+      ToastAndroid.LONG,
+      ToastAndroid.CENTER
+    );
+    SetActive(false);
+    setCity(null);
+    setDistrict(null);
+  }
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.container}>
@@ -276,7 +286,7 @@ const ParkPage = () => {
                 color="black"
                 onPress={() => SetActive(false)}
               />
-              <Text style={{fontSize:18,letterSpacing:1}}>
+              <Text style={{ fontSize: 18, letterSpacing: 1 }}>
                 {cities[city - 1].label}/{park.label}
               </Text>
               <View style={styles.box}>
@@ -323,25 +333,34 @@ const ParkPage = () => {
                   />
                   <Text style={{ fontSize: 22 }}>{park.full}</Text>
                 </View>
-                <View style={{width:"100%",marginTop:15,alignItems:"center"}}>
-                  <Text style={{fontSize:16,letterSpacing:1}}>Vehicle plate number</Text>
+                <View
+                  style={{ width: "100%", marginTop: 15, alignItems: "center" }}
+                >
+                  <Text style={{ fontSize: 16, letterSpacing: 1 }}>
+                    Vehicle plate number
+                  </Text>
                   <TextInput
                     style={styles.textInput}
                     placeholder={"34xxx1234"}
-                    textAlign={'center'}
+                    textAlign={"center"}
                   />
-                  <View style={{width:"100%",alignItems:"center",marginTop:25}}>
-                  <BaseButton
-                    title={"create car appointment"}
-                    buttonColor={"blue"}
-                    setWidht={"80%"}
-                    handleFontSize={15}
-                    buttonColorPressed={"black"}
-                    handleOnPress={()=>alert("Appointment made")}
-                  />
+                  <View
+                    style={{
+                      width: "100%",
+                      alignItems: "center",
+                      marginTop: 25,
+                    }}
+                  >
+                    <BaseButton
+                      title={"create car appointment"}
+                      buttonColor={"blue"}
+                      setWidht={"80%"}
+                      handleFontSize={15}
+                      buttonColorPressed={"black"}
+                      handleOnPress={() => showToast()}
+                    />
                   </View>
                 </View>
-                
               </View>
             </View>
           )}
@@ -374,14 +393,14 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     padding: 10,
     alignItems: "center",
-    marginTop:15,
-    backgroundColor:"white"
+    marginTop: 15,
+    backgroundColor: "white",
   },
-  textInput:{
-    borderWidth:2,
-    width:"80%",
-    height:45,
-    marginTop:25,
-    borderRadius:10,
-  }
+  textInput: {
+    borderWidth: 2,
+    width: "80%",
+    height: 45,
+    marginTop: 25,
+    borderRadius: 10,
+  },
 });

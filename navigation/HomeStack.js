@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View,Image } from 'react-native'
 import React from 'react'
 import HomePage from '../screens/HomePage';
 import ProfilePage from '../screens/ProfilePage';
@@ -19,9 +19,9 @@ const HomeStack = () => {
         screenOptions={({route})=>({
           tabBarIcon:({focused,color,size})=>{
             let iconName;
-            if(route.name==='HomePage')return <AntDesign name="home" size={24} color="white" />
-            if(route.name==='ParkPage')return <MaterialCommunityIcons name="car-brake-parking" size={24} color="white" />
-            if(route.name==='ProfilePage')return <AntDesign name="profile" size={24} color="white" />
+            if(route.name==='Home')return <Image source={require("../assets/home.png")} style={{ height: 32, width: 32 }}/>
+            if(route.name==='Appointment')return <Image source={require("../assets/randevu.png")} style={{ height: 32, width: 32 }}/>
+            if(route.name==='Profile')return <Image source={require("../assets/customer.png")} style={{ height: 32, width: 32 }}/>//<AntDesign name="profile" size={24} color="white" />
           },
           tabBarActiveTintColor:'white',
           tabBarInactiveTintColor:'gray',
@@ -37,9 +37,9 @@ const HomeStack = () => {
           }
         })}
       >
-        <Tab.Screen name='HomePage' component={HomePage}/>
-        <Tab.Screen name='ParkPage' component={ParkPage}/>
-        <Tab.Screen name='ProfilePage' component={ProfilePage}/>
+        <Tab.Screen name='Home' component={ParkPage}/>
+        <Tab.Screen name='Appointment' component={HomePage}/>
+        <Tab.Screen name='Profile' component={ProfilePage}/>
       </Tab.Navigator>
     </NavigationContainer>
   )
